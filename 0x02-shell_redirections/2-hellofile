@@ -1,2 +1,2 @@
 #!/bin/bash
-cat /detc/passwd
+cat /etc/passwd
