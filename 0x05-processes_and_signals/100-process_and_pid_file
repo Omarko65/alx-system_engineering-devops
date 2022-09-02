@@ -4,7 +4,7 @@
 # it reads removes the file when SIGINT or SIGTERM is passed
 # An infinite loop is created also
 echo $$ > /var/run/myscript.pid
-trap "I hate the kill command; rm /var/run/myscript.pid" SIGTERM
+trap "echo I hate the kill command; rm /var/run/myscript.pid" SIGTERM
 trap "Y U no love me?!" SIGINT
 trap "rm /var/run/myscript.pid" SIGQUIT
 while true
