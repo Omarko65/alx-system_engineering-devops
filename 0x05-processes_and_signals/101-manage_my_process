@@ -10,12 +10,12 @@ then
 elif [ "$command" == "stop" ]
 then
 	kill "$(pgrep -f /manage_my_process)"
-	rm -r /var/run/my_process.pid
+	rm /var/run/my_process.pid
 	echo "manage_my_process stopped"
 elif [ "$command" == "restart" ]
 then
 	kill "$(pgrep -f /manage_my_process)"
-	rm -r /var/run/my_process.pid
+	rm /var/run/my_process.pid
 	./manage_my_process &
 	echo $$ > /var/run/my_process.pid
 	echo "manage_my_process restarted"
