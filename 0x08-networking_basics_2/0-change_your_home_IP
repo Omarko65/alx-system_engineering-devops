@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 # A script that changes localhost
-echo "$(cat~/hosts.new)">/etc/hosts
+cat~/hosts.new>/etc/hosts
