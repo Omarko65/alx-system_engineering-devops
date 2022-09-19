@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 # A script that changes localhost
 cp /etc/hosts ~/hosts.new
+cp -f ~/hosts.new /etc/hosts
