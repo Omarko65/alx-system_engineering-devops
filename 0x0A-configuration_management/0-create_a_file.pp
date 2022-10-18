@@ -1,7 +1,7 @@
 # create a file
 
 file { '/tmp/school':
-  ensure  => 'present'
+  ensure  => 'present',
   replace => 'no',
   mode    => '0744',
   owner   => 'www-data',
