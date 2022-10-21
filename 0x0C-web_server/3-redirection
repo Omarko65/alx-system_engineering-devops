@@ -15,13 +15,11 @@ SERVER_BLOCK=\
         index index.html index.htm index.nginx-debian.html;
 
         server_name _;
+	return 301 \$scheme://www.github.com/holic65\$request_uri;
 
         location / {
                 try_files \$uri \$uri/ =404;
         }
-	if (\$request_filename ~ redirect_me){
-		rewrite ^ https://github.com/holic65 permanent;
-	}
 }"
 bash -c "echo -e '$SERVER_BLOCK' > /etc/nginx/sites-available/default"
 sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites/enabled/
