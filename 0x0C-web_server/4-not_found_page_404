@@ -6,7 +6,7 @@ sudo ufw allow 'Nginx HTTP'
 sudo mkdir -p /var/www/html
 sudo chmod -R 755 /var/www
 echo "Hello World!" > /var/www/html/index.nginx-debian.html;
-echo -e "Ceci n\'est pas une page" > /var/www/html/error404.html;
+echo -e "Ceci n'est pas une page" > /var/www/html/error404.html;
 SERVER_BLOCK=\
 "server {
         listen 80 default_server;
@@ -23,7 +23,7 @@ SERVER_BLOCK=\
 		rewrite ^ https://github.com/holic65 permanent;
 	}
 	error_page 404 /error404.html;
-	location /error404.html {
+	location = /error404.html {
 		internal;
 	}
 }"
