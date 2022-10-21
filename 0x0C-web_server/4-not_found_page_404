@@ -23,9 +23,8 @@ SERVER_BLOCK=\
 		rewrite ^ https://github.com/holic65 permanent;
 	}
 	error_page 404 /error404.html;
-	location error_page {
-		root /var/www/html/
-		internal
+	location /error404.html {
+		internal;
 	}
 }"
 bash -c "echo -e '$SERVER_BLOCK' > /etc/nginx/sites-available/default"
