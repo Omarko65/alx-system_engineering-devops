@@ -22,7 +22,7 @@ SERVER_BLOCK=\
 	if (\$request_filename ~ redirect_me){
 		rewrite ^ https://github.com/holic65 permanent;
 	}
-	error_page 404 /error404.html
+	error_page 404 /error404.html;
 	location error_page {
 		root /var/www/html/
 		internal
