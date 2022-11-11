@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # a bash scrip that debugs failed to connect error
 sed -i 's/listen 8080/listen 80g' /etc/nginx/sites-enabled/default
 sed -i 's/listen \[::\]:8080/listen \[::\]80g' /etc/nginx/sites-enabled/default
