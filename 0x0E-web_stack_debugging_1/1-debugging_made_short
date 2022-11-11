@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# a script tht fix port error
+rm /etc/nginx/sites-enabled/default
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+service nginx restart
+echo "" > /run/nginx.pid
