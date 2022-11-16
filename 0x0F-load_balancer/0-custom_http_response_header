@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+sudo apt update
+sudo apt install nginx
+sudo enable ufw
+sudo ufw allow 'Nginx Full'
+sudo ufw reload
+sudo service nginx restart
+sed -e '26/$/	add_header X-Served-By 26582-web-02' /etc/nginx/nginx.conf
+sed -e '53/$/		add_header X-Served-By 26582-web-02' /etc/nginx/sites-available/default
+sudo service nginx restart
