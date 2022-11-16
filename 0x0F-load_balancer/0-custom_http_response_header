@@ -6,6 +6,6 @@ sudo enable ufw
 sudo ufw allow 'Nginx Full'
 sudo ufw reload
 sudo service nginx restart
-sed -e '26/$/	add_header X-Served-By 26582-web-02' /etc/nginx/nginx.conf
-sed -e '53/$/		add_header X-Served-By 26582-web-02' /etc/nginx/sites-available/default
+sudo sed -e '26/$/	add_header X-Served-By 26582-web-02' /etc/nginx/nginx.conf
+sudo sed -e '53/$/		add_header X-Served-By 26582-web-02' /etc/nginx/sites-available/default
 sudo service nginx restart
