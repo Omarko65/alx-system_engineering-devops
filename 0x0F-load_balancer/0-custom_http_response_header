@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# a script that describes how to configure new ubuntu machine
 sudo apt update
 sudo apt install nginx
 sudo enable ufw
