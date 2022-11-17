@@ -1,25 +1,31 @@
 #!/usr/bin/python3
+"""A Python script that, using this REST API, for a given employee ID,
+returns information about his/her TODO list progress.
 """
-For a given employee ID, returns information about his/her TODO list progress,
-using an API.
-"""
+
 import requests
 from sys import argv
 
-URL = "https://jsonplaceholder.typicode.com"  # The API's URL
-
 if __name__ == "__main__":
-    if len(argv) > 1:
-        if argv[1].isdecimal() and int(argv[1]) >= 0:
-            emp_id = int(argv[1])
-            u_resp = requests.get('{}/users/{}'.format(URL, emp_id)).json()
-            t_resp = requests.get('{}/todos'.format(URL)).json()
-            emp_name = u_resp.get('name')
-            todos = [t for t in t_resp if t.get('userId') == emp_id]
-            completed = [t for t in todos if t.get('completed')]
-            print('Employee {} is done with tasks({}/{}):'.format(
-                        emp_name,
-                        len(completed),
-                        len(todos)))
-            for t in completed:
-                print('\t {}'.format(t.get('title')))
+    try:
+        url = "https://jsonplaceholder.typicode.com/users/{}".format(argv[1])
+    except IndexError:
+        exit
+
+    res = requests.get(url)
+    res = res.json()
+    user_deets = "Employee {} is done with tasks".format(res.get('name'))
+    print(user_deets, end="")
+    res = requests.get(url + "/todos")
+    res = res.json()
+    done = 0
+    for task in res:
+        if task.get('completed'):
+            done += 1
+    print("({}/{}):".format(done, len(res)))
+    [print("\t {}".format(task.get('title')))
+        if task.get('completed') else "" for task in res]
+
+    # for task in res:
+    #     if task.get('completed'):
+    #         print("\t {}".format(task.get('title')))

@@ -1,25 +1,32 @@
 #!/usr/bin/python3
+"""Using what you did in the task #0, extend your Python script
+to export data in the CSV format.
 """
-For a given employee ID, returns information about his/her TODO list progress,
-using an API.
-"""
+
+import csv
 import requests
 from sys import argv
 
-URL = "https://jsonplaceholder.typicode.com"  # The API's URL
-
 if __name__ == "__main__":
-    if len(argv) > 1:
-        if argv[1].isdecimal() and int(argv[1]) >= 0:
-            emp_id = int(argv[1])
-            u_resp = requests.get('{}/users/{}'.format(URL, emp_id)).json()
-            t_resp = requests.get('{}/todos'.format(URL)).json()
-            emp_name = u_resp.get('name')
-            todos = [t for t in t_resp if t.get('userId') == emp_id]
-            completed = [t for t in todos if t.get('completed')]
-            print('Employee {} is done with tasks({}/{}):'.format(
-                        emp_name,
-                        len(completed),
-                        len(todos)))
-            for t in completed:
-                print('\t {}'.format(t.get('title')))
+    try:
+        user_id = argv[1]
+        url = "https://jsonplaceholder.typicode.com/users/{}".format(user_id)
+        file_name = "{}.csv".format(user_id)
+    except IndexError:
+        exit
+
+    res = requests.get(url)
+    res = res.json()
+    user_name = "{}".format(res.get('username'))
+    res = requests.get(url + "/todos")
+    res = res.json()
+
+    with open(file_name, "w") as f:
+        writer = csv.writer(f, quoting=csv.QUOTE_ALL)
+        for task in res:
+            writer.writerow([
+                user_id,
+                user_name,
+                task.get('completed'),
+                task.get('title')
+            ])

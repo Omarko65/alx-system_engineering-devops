@@ -1,30 +1,37 @@
 #!/usr/bin/python3
+"""Using what you did in the task #0, extend your Python script
+to export data in the CSV format.
 """
-For a given employee ID, returns information about his/her TODO list progress,
-using an API.
-"""
-from sys import argv
+
+import csv
 import json
 import requests
-
-URL = "https://jsonplaceholder.typicode.com"  # The API's URL
+from sys import argv
 
 if __name__ == "__main__":
-    if len(argv) > 1:
-        if argv[1].isdecimal() and int(argv[1]) >= 0:
-            emp_id = int(argv[1])
-            u_resp = requests.get('{}/users/{}'.format(URL, emp_id)).json()
-            t_resp = requests.get('{}/todos'.format(URL)).json()
-            username = u_resp.get('username')
-            todos = [t for t in t_resp if t.get('userId') == emp_id]
-            emp_dict, tasklist = {}, []
-            for t in todos:
-                title = t.get('title')
-                t_status = t.get('completed')
-                tasklist.append({
-                    "task": title,
-                    "completed": t_status,
-                    "username": username})
-            emp_dict[str(emp_id)] = tasklist
-            with open("{}.json".format(emp_id), "w") as f:
-                json.dump(emp_dict, f)
+    try:
+        user_id = argv[1]
+        url = "https://jsonplaceholder.typicode.com/users/{}".format(user_id)
+        file_name = "{}.json".format(user_id)
+    except IndexError:
+        exit
+
+    res = requests.get(url)
+    res = res.json()
+    user_name = "{}".format(res.get('username'))
+    res = requests.get(url + "/todos")
+    res = res.json()
+
+    my_dict = {}
+    my_dict[user_id] = []
+
+    for task in res:
+        task_dict = {
+            "task": task.get('title'),
+            "completed": task.get('completed'),
+            "username": user_name
+        }
+        my_dict[user_id].append(task_dict)
+
+    with open(file_name, "w") as f:
+        f.write(json.dumps(my_dict))
