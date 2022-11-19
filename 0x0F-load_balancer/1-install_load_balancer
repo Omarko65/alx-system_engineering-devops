@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 # a script that configures haproxy on server
-sudo apt-get install haproxy
-init=/etc/default/haproxy
+sudo apt update
+sudo apt install haproxy -y
+
+initfile=/etc/default/haproxy
 haconfig=/etc/haproxy/haproxy.cfg
-echo "ENABLED=1" | sudo tee -a "$init"
+
+echo "ENABLED=1" | sudo tee -a "$initfile"
+
 config=\
 "
 
@@ -18,4 +22,4 @@ backend my_servers
 "
 
 echo "$config" | sudo tee -a "$haconfig"
-sudo service haproxy restart
+sudo systemctl restart haproxy.service
