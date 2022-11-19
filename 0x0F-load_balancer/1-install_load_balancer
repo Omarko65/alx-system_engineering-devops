@@ -18,3 +18,4 @@ backend my_servers
 "
 
 echo "$config" | sudo tee -a "$haconfig"
+sudo service haproxy restart
