@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-# fix empty reply from server
-service apache2 start
