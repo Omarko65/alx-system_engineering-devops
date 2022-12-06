@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-# A script that connects to a server using ssh
-ssh -i ~/.ssh/school ubuntu
