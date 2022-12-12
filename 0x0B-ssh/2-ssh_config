@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# a script that disables password authentication in ssh
+IdentityFile ~/.ssh/school
+PasswordAuthentication no
