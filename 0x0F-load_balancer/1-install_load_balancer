@@ -14,7 +14,6 @@ config=\
 frontend myfrontend
 	bind *:80
 	default_backend myservers
-
 backend myservers
 	balance roundrobin
 	server web-01 54.85.93.141:80 check
