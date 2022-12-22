@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# a script that configures port to listen to all port
+sudo rm /etc/nginx/sites-enabled/default
+sudo cp -l /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+sudo service nginx restart
