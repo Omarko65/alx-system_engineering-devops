@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# a bashscript that backups up database in a server
+mysqldump -uroot -p"$1" --all-databases > backup.sql
+DATE=$(date +%d-%m-%Y)
+tar -czvf "$DATE".tar.gz backup.sql
