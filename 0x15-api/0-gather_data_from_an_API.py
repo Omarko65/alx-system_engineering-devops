@@ -18,10 +18,10 @@ if __name__ == "__main__":
     done = 0
     task = 0
     for tasks in res:
-        if tasks['completed']:
+        if tasks.get('completed'):
             done = done + 1
         task = task + 1
     print('tasks({}/{})'.format(done, task))
     for titles in res:
-        if titles['completed']:
+        if titles.get('completed'):
             print('\t {}'.format(titles['title']))
