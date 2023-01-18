@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 ''' a script that export data in csv format '''
+import csv
 import requests
 from sys import argv
 
@@ -17,8 +18,12 @@ if __name__ == "__main__":
     u_id = res.get("id")
     r = requests.get(url+'/todos')
     res = r.json()
-    with open("{}.csv".format(uid), "w") as csv:
+    with open("{}.csv".format(uid), "w") as csvf:
+        csvwriter = csv.writer(csvf, quoting=csv.QUOTE_ALL)
         for tasks in res:
-            csv.write('"{}","{}",'.format(u_id, u_name))
-            csv.write('"{}",'.format(tasks.get('completed')))
-            csv.write('"{}"\n'.format(tasks.get('title')))
+            csvwriter.writerow([
+                u_id, 
+                u_name,
+                tasks.get('completed'),
+                tasks.get('title')
+            ])
