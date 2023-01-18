@@ -9,6 +9,7 @@ if __name__ == "__main__":
     try:
         uid = argv[1]
         url = ('https://jsonplaceholder.typicode.com/users/{}'.format(uid))
+        filename = "{}.csv".format(uid)
     except IndexError:
         exit
 
@@ -18,7 +19,7 @@ if __name__ == "__main__":
     u_id = res.get("id")
     r = requests.get(url+'/todos')
     res = r.json()
-    with open("{}.csv".format(uid), "w") as csvf:
+    with open(filename, "w") as csvf:
         csvwriter = csv.writer(csvf, quoting=csv.QUOTE_ALL)
         for tasks in res:
             csvwriter.writerow([
