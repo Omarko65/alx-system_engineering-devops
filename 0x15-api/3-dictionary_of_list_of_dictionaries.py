@@ -25,5 +25,5 @@ if __name__ == '__main__':
             }
             json_dict[u_id].append(to_do_dict)
 
-    with open('todo_all_employess.json', 'w') as f:
+    with open('todo_all_employees.json', 'w') as f:
         f.write(json.dumps(json_dict))
