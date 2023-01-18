@@ -22,7 +22,7 @@ if __name__ == "__main__":
         csvwriter = csv.writer(csvf, quoting=csv.QUOTE_ALL)
         for tasks in res:
             csvwriter.writerow([
-                u_id, 
+                u_id,
                 u_name,
                 tasks.get('completed'),
                 tasks.get('title')
